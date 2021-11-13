@@ -1,0 +1,19 @@
+
+.container {
+    border-top: 3px solid white;
+    border-bottom: 3px solid white;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 15px;
+}
+
+.container-item
+{
+    flex: 1 0 30%;
+    width: 300px;
+    margin-right: 6px;
+    margin-bottom: 6px;
+  
+
+}
