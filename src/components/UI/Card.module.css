@@ -1,0 +1,14 @@
+.card-container
+{
+    height: 20vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:center;
+    background-color:rgba(112, 130, 219, 0.2);
+    border-radius: 4px;
+    width: 25vw;
+    margin-right: 8px;
+    margin-bottom: 4px;
+    text-align: center;
+}

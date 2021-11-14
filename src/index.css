@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital@0;1&display=swap');
 
 body{
-  background-color: #213294;
+  background: linear-gradient(195deg, #072c5c, #00317e, #0034a1, #0035c2, #0030e2, #1120ff);
   color: white;
   font-family: 'Roboto', sans-serif;
 }

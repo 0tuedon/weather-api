@@ -1,5 +1,6 @@
 import Details from './components/Details';
 import Header from './components/Header';
+import MoreForeCast from './components/MoreForcast';
 
 function App() {
 
@@ -7,6 +8,7 @@ function App() {
     <div className="container">
       <Header/>
       <Details/>
+      <MoreForeCast/>
     </div>
   );
 }

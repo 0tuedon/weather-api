@@ -2,18 +2,27 @@
 .container {
     border-top: 3px solid white;
     border-bottom: 3px solid white;
+    /* border-left: 4px red solid; */
+    text-align: center;
     display: flex;
-    justify-content: center;
+    justify-content:space-between ;
+    align-items: center;
     flex-wrap: wrap;
-    margin-top: 15px;
+    margin-top: 40px;
+    padding: 5px 5px;
+
 }
 
 .container-item
 {
     flex: 1 0 30%;
     width: 300px;
-    margin-right: 6px;
+    margin-right: 2px;
     margin-bottom: 6px;
   
 
+}
+
+.container:nth-last-child(){
+    margin-right: 2px;
 }
