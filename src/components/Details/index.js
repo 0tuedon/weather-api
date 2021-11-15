@@ -2,10 +2,14 @@ import Weather from "./Weather"
 import WeatherDetails from "./WeatherDetails"
 
 const Details = ()=>{
- 
+    
+  
+     
     return(
     <div>
-        <Weather/>
+        <Weather
+            
+        />
         <WeatherDetails/>
     </div>)
 }

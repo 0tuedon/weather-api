@@ -1,16 +1,25 @@
-import React from "react"
+import React, { useContext } from "react"
+import WeatherCtx from "../../store/weatherContext";
 import style from "./WeatherDetails.module.css";
 const WeatherDetails = () => {
+    const ctx = useContext(WeatherCtx)
+    const {list} =ctx
+    console.log(list[0])
+    const {main,wind}  = list[0]
+    let {speed} = wind
+    let {temp_min,temp_max} = main
+    temp_min = temp_min.toFixed(0) -273
+    temp_max = temp_max.toFixed(0) -273
 
     return (
         <React.Fragment>
             <div className={style.container}>
                 <div className={style['container-item']}>
-                    <h3>23</h3>
+                    <h3>{temp_max}</h3>
                     <p>High</p>
                 </div>
                 <div className={style['container-item']}>
-                    <h3>7MPH</h3>
+                    <h3>{speed} M/S</h3>
                     <p>Wind</p>
                 </div>
                 <div className={style['container-item']}>
@@ -18,12 +27,12 @@ const WeatherDetails = () => {
                     <p>SunRise</p>
                 </div>
                 <div className={style['container-item']}>
-                    <h3>14</h3>
-                    <p>Test</p>
+                    <h3>{temp_min}</h3>
+                    <p>Low</p>
                 </div>
                 <div className={style['container-item']}>
                     <h3> 0</h3>
-                    <p> Hello</p>
+                    <p>Humidity</p>
                 </div>
                 <div className={style['container-item']}>
                     <h3> 20:57 </h3>
