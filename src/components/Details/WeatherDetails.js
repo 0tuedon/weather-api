@@ -9,7 +9,7 @@ const WeatherDetails = () => {
     let {temp_min,temp_max} = main
     temp_min = temp_min.toFixed(0) -273
     temp_max = temp_max.toFixed(0) -273
-
+    
     let {sunrise,sunset} = city
      sunrise = sunrise * 1000
     sunset = sunset *1000
