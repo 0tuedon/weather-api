@@ -1,27 +1,24 @@
-import { useState } from 'react';
+import { useContext} from 'react';
 import Details from './components/Details';
 import Header from './components/Header';
+import Loading from './components/Loading';
 import MoreForeCast from './components/MoreForcast';
-import {WeatherctxProvider}from './store/weatherContext'
+import WeatherCtx from './store/weatherContext'
 
 
-function App() {
-  const [isLoading,setIsLoading] = useState(true)
-  setTimeout(()=>{
-    setIsLoading(false)
-  }
-  ,3000)
+const  App = ()=>  {
+  const ctx = useContext(WeatherCtx)
+  const {isLoading} = useContext(WeatherCtx)
+  console.log("app,js ",  isLoading)
   return (
-    <WeatherctxProvider>
-       <div className="container">
-       {isLoading&&<h1>Loading......</h1>}
-      {!isLoading&& <Header/>}
-      {!isLoading&&<Details/>}
-      {!isLoading&&<MoreForeCast/>}
-    </div>
-    </WeatherctxProvider>
-      
    
+       <div className="container">
+    {ctx.isLoading&& <Loading/>}
+       {!ctx.isLoading&&<Header/>}
+       {!ctx.isLoading && <Details/>}
+      {!ctx.isLoading && <MoreForeCast/>}
+     </div>
+
   );
 }
 

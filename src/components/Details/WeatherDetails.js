@@ -3,9 +3,9 @@ import WeatherCtx from "../../store/weatherContext";
 import style from "./WeatherDetails.module.css";
 const WeatherDetails = () => {
     const ctx = useContext(WeatherCtx)
-    const {list,city} =ctx
-    const {main,wind}  = list[0]
-    let {speed} = wind
+    const {list,city} =ctx ?? {}
+    const {main,wind}  = list?.[0] ?? {}
+    let {speed} = wind ?? {}
     let {temp_min,temp_max} = main
     temp_min = temp_min.toFixed(0) -273
     temp_max = temp_max.toFixed(0) -273

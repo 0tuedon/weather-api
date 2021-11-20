@@ -4,9 +4,19 @@ body{
   background: linear-gradient(195deg, #072c5c, #00317e, #0034a1, #0035c2, #0030e2, #1120ff);
   color: white;
   font-family: 'Roboto', sans-serif;
+  z-index: 40;
 }
 body div
 {
   padding: 1px 2px;
 }
-
+/* 
+#loading 
+{
+  width: 90vw;
+  height: 96vh;
+  z-index: -1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */

@@ -7,7 +7,7 @@ const Header = ()=>
     const ctx = useContext(WeatherCtx)
     const timeZone = ctx.city.timezone/3600
     const {list} =ctx
-    const{dt_txt} = list[0] 
+    const{dt_txt} = list?.[0] ?? {}
     const stringDate = new Date(dt_txt)
 
     return(
@@ -17,5 +17,4 @@ const Header = ()=>
         </header>
     )
 }
-
 export default Header;

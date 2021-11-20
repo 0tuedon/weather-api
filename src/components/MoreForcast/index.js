@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback, useContext, useEffect, useState } from 'react'
 import Card from '../UI/Card';
 import style from './MoreForecast.module.css'
@@ -11,63 +12,77 @@ const MoreForeCast = () => {
         return new Date(unix * 1000);
     }
     const today = new Date().getDay()
+    let todayCount =  1
     let Weatherarray = []
     const getData = useCallback( () => {
         const weather = list.filter(
             (data, index) => {
-                const date = unixToDateString(data.dt)
-                if (date.getDay() === today + 1 && today+1 <7) {
+                const date = unixToDateString(data.dt)              
+            if(today + todayCount < 7)
+            {
+                console.log(todayCount)
+                if (date.getDay() === today + todayCount  && today +1 <7) {
                     if (unixToDateString(data.dt).getHours() === 13) {
+                        todayCount++;
+                        console.log(todayCount)
                         Weatherarray.push(data);
                     }
                 }
-                else if (date.getDay() === today + 2 && today+2 <7) {
+                else if (date.getDay() === today + todayCount && today+2 <7) {
                     if (unixToDateString(data.dt).getHours() === 13) {
+                        todayCount++
                       Weatherarray.push(data);
                     }
                 }
-                else if (date.getDay() === today + 3 && today+3 <7) {
+                else if (date.getDay() === todayCount + todayCount && today+3 <7) {
                     if (unixToDateString(data.dt).getHours() === 13) {
+                        todayCount++;
                         Weatherarray.push(data);  
                     }
                 }
-                else if (date.getDay() === today + 4 && today+4<7) {
+                else if (date.getDay() === todayCount + todayCount && today+4<7) {
                     if (unixToDateString(data.dt).getHours() === 13) {
-                         Weatherarray.push(data);
-                        
-                    }
-                }
-                else if (date.getDay() === today + 5 && today+4 <7) {
-                    if (unixToDateString(data.dt).getHours() === 13) {
+                        todayCount++
                          Weatherarray.push(data);
                     }
                 }
-                else if (date.getDay() === today + 5 && today+5 <7) {
+                else if (date.getDay() === todayCount + todayCount && today+4 <7) {
                     if (unixToDateString(data.dt).getHours() === 13) {
+                        todayCount++
                          Weatherarray.push(data);
                     }
                 }
-                else if (date.getDay() === today + 6&& today+6 <7) {
+                else if (date.getDay() === todayCount + todayCount && today+5 <7) {
                     if (unixToDateString(data.dt).getHours() === 13) {
+                        todayCount++
                          Weatherarray.push(data);
                     }
                 }
-                
-               
-                return Weatherarray ;
+                else {
+                   
+                }
 
+            }
+
+            else if(today + todayCount > 7) {
+                todayCount = today -7
+                console.log(todayCount + "else")
+            }
+            else {
+                todayCount = 0
+            }
+                
+                return Weatherarray ;
             }
            
         )
      return weather
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[today,list])
-    console.log(forecast)
-        useEffect(()=>{
-                getData();
-            setForecast(Weatherarray)
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        },[])
+    useEffect(()=>{
+        getData();
+        setForecast(Weatherarray)
+    },[])
     
     return (
         <React.Fragment>
@@ -79,11 +94,15 @@ const MoreForeCast = () => {
                         const {main} = data
                         let {temp} = main
                         temp = temp - 273
+
                         return (<Card
                             key={index}
                         >
-                            <h4 className={style['card-heading']}>{day[unixToDateString(data.dt).getDay()]}</h4>
-                            <img className={style['card-image']} src={weatherId.props.src} alt='Weather Type' />
+                            <h4 className={style['card-heading']}>{day[unixToDateString(data.dt).getDay()]}
+                            </h4>
+                            <img className={style['card-image']} src={weatherId.props.src} alt='Weather Type'
+                             
+                            />
                             <p>{temp.toFixed(0)}<sup>o</sup> C</p>
                         </Card>)
                     })

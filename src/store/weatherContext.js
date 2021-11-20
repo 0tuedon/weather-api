@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Rain from '../assets/images/Weather/Rain.png';
 import ThunderStorm from '../assets/images/Weather/ThunderStorm.png';
 import Drizzle from '../assets/images/Weather/Drizzle.png';
@@ -17,12 +17,14 @@ const WeatherCtx = React.createContext({
     },
     timeZone: "",
     sunrise: 0,
+    isLoading:true,
+    setIsLoading:(value)=>{},
     sunset: 0,
     getWeatherId: () => { }
 })
 
 export const WeatherctxProvider = (props) => {
-
+    const [isLoading, setIsLoading] = useState(true)
     const [weatherForeCast, setWeatherForeCast] = useState({
         cod: 0,
         city: {
@@ -36,9 +38,9 @@ export const WeatherctxProvider = (props) => {
         current: {
             main: {}
         }
-    })
+    });
 
-    const getWeatherId = (code) => {
+    const getWeatherId = useCallback((code) => {
         if (code >= 200 && code < 300) {
             return (
                 <img src={ThunderStorm} alt='ThunderStorm' />
@@ -70,34 +72,51 @@ export const WeatherctxProvider = (props) => {
             )
         }
     }
+        , [])
 
     useEffect(() => {
         const getFullWeather = async () => {
-            const url = 'https://api.openweathermap.org/data/2.5/forecast?q=ABUJA&appid=54dd919bfdd8425a9c09edb660c119ff';
-            const response = await fetch(url);
-            const data = await response.json();
-            setWeatherForeCast(data);
-        }
-        getFullWeather();
-    }, [])
-
-    return (
-        <WeatherCtx.Provider
-            value={
-                {
-                    id: weatherForeCast.city.id,
-                    status: weatherForeCast.cod,
-                    city: weatherForeCast.city,
-                    weatherForecast: weatherForeCast.list,
-                    timeZone: weatherForeCast.timeZone,
-                    list: weatherForeCast.list,
-                    current: weatherForeCast.list[0],
-                    getWeatherId: getWeatherId
-                }
+            setIsLoading(true)
+            try {
+            const url = 'https://api.openweathermap.org/data/2.5/forecast?q=ABUJA&appid=075ab84264b752986e16559ecbe06c8f';
+            const res = await fetch(url)
+            const data = await res.json();
+            setWeatherForeCast(data)
+            setIsLoading(false)
             }
-        >
-            {props.children}
-        </WeatherCtx.Provider>
-    )
+            catch{
+                console.log('err')
+                setIsLoading(false)
+            }
+            finally{
+                console.log(weatherForeCast)
+                console.log("testse")
+                setIsLoading(false)
+            }
 }
+            getFullWeather()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+return (
+    <WeatherCtx.Provider
+        value={
+            {
+                id: weatherForeCast?.city?.id,
+                status: weatherForeCast.cod,
+                city: weatherForeCast?.city,
+                weatherForecast: weatherForeCast.list,
+                timeZone: weatherForeCast.timeZone,
+                list: weatherForeCast?.list,
+                current: weatherForeCast?.list[0],
+                getWeatherId: getWeatherId,
+                isLoading: isLoading,
+                setIsLoading:setIsLoading
+            
+        }
+        }
+    >
+        {props.children}
+    </WeatherCtx.Provider>
+)
+    }
 export default WeatherCtx;
