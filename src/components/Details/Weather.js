@@ -12,8 +12,7 @@ const Weather = (props)=>
     const {description} = weather?.[0]
     let tempinCelsius = temp-273.33
     let weatherImg = ctx.getWeatherId(weather.id)
-
-   
+       
     return(
         <React.Fragment>
         <div className={style.container}>

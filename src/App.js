@@ -8,8 +8,7 @@ import WeatherCtx from './store/weatherContext'
 
 const  App = ()=>  {
   const ctx = useContext(WeatherCtx)
-  const {isLoading} = useContext(WeatherCtx)
-  console.log("app,js ",  isLoading)
+
   return (
    
        <div className="container">

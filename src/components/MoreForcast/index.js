@@ -66,7 +66,6 @@ const MoreForeCast = () => {
 
             else if(today + todayCount > 7) {
                 todayCount = today -7
-                console.log(todayCount + "else")
             }
             else {
                 todayCount = 0

@@ -9,7 +9,6 @@ const Header = ()=>
     const {list} =ctx
     const{dt_txt} = list?.[0] ?? {}
     const stringDate = new Date(dt_txt)
-
     return(
         <header className={style.heading}>
             <h1 className={style['h1-heading']}>{ctx.city.name},{ctx.city.country}</h1>
