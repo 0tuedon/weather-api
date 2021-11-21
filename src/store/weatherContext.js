@@ -85,12 +85,9 @@ export const WeatherctxProvider = (props) => {
             setIsLoading(false)
             }
             catch{
-                console.log('err')
-                setIsLoading(false)
+                setIsLoading(true)
             }
             finally{
-                console.log(weatherForeCast)
-                console.log("testse")
                 setIsLoading(false)
             }
 }

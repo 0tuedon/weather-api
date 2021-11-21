@@ -11,81 +11,35 @@ const MoreForeCast = () => {
     const unixToDateString = (unix) => {
         return new Date(unix * 1000);
     }
-    const today = new Date().getDay()
-    let todayCount =  1
-    let Weatherarray = []
+    
     const getData = useCallback( () => {
         const weather = list.filter(
             (data, index) => {
-                const date = unixToDateString(data.dt)              
-            if(today + todayCount < 7)
-            {
-                console.log(todayCount)
-                if (date.getDay() === today + todayCount  && today +1 <7) {
-                    if (unixToDateString(data.dt).getHours() === 13) {
-                        todayCount++;
-                        console.log(todayCount)
-                        Weatherarray.push(data);
-                    }
-                }
-                else if (date.getDay() === today + todayCount && today+2 <7) {
-                    if (unixToDateString(data.dt).getHours() === 13) {
-                        todayCount++
-                      Weatherarray.push(data);
-                    }
-                }
-                else if (date.getDay() === todayCount + todayCount && today+3 <7) {
-                    if (unixToDateString(data.dt).getHours() === 13) {
-                        todayCount++;
-                        Weatherarray.push(data);  
-                    }
-                }
-                else if (date.getDay() === todayCount + todayCount && today+4<7) {
-                    if (unixToDateString(data.dt).getHours() === 13) {
-                        todayCount++
-                         Weatherarray.push(data);
-                    }
-                }
-                else if (date.getDay() === todayCount + todayCount && today+4 <7) {
-                    if (unixToDateString(data.dt).getHours() === 13) {
-                        todayCount++
-                         Weatherarray.push(data);
-                    }
-                }
-                else if (date.getDay() === todayCount + todayCount && today+5 <7) {
-                    if (unixToDateString(data.dt).getHours() === 13) {
-                        todayCount++
-                         Weatherarray.push(data);
-                    }
-                }
-                else {
-                   
-                }
+             let weatherDate = unixToDateString(data.dt).getDay()
+             let today = new Date().getDay()
 
+             return weatherDate !== today
             }
-
-            else if(today + todayCount > 7) {
-                todayCount = today -7
-            }
-            else {
-                todayCount = 0
-            }
-                
-                return Weatherarray ;
-            }
-           
         )
+        const threeDayForecast = weather.filter((data,index)=>
+        {
+            let dayLoop = 8
+            return index % dayLoop === 0
+        }
+        )
+        setForecast(threeDayForecast)
+
      return weather
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[today,list])
+    },[list])
+    
     useEffect(()=>{
         getData();
-        setForecast(Weatherarray)
+        
     },[])
-    
     return (
         <React.Fragment>
-            <h3>More Forecast</h3>
+            <h3>Forecast for Next 5 Days</h3>
             <div className={style.container}>
                 {
                     forecast.map((data, index) => {
