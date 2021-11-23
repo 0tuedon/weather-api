@@ -27,7 +27,8 @@ const MoreForeCast = () => {
             return index % dayLoop === 0
         }
         )
-        setForecast(threeDayForecast)
+        const threeDaysForecast =  threeDayForecast.filter((data,index)=>index < 3)
+        setForecast(threeDaysForecast)
 
      return weather
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -39,7 +40,7 @@ const MoreForeCast = () => {
     },[])
     return (
         <React.Fragment>
-            <h3>Forecast for Next 5 Days</h3>
+            <h3>Forecast for Next 3 Days</h3>
             <div className={style.container}>
                 {
                     forecast.map((data, index) => {

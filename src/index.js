@@ -7,8 +7,7 @@ import {WeatherctxProvider} from './store/weatherContext'
 
 ReactDOM.render(
   <WeatherctxProvider>
-     <App />
-  </WeatherctxProvider>
- ,
+     <App/>
+  </WeatherctxProvider>,
   document.getElementById('root')
 )

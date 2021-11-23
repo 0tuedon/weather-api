@@ -18,6 +18,7 @@ const WeatherCtx = React.createContext({
     timeZone: "",
     sunrise: 0,
     isLoading:true,
+    finalLocation:'Abuja',
     setIsLoading:(value)=>{},
     sunset: 0,
     getWeatherId: () => { }
@@ -25,6 +26,7 @@ const WeatherCtx = React.createContext({
 
 export const WeatherctxProvider = (props) => {
     const [isLoading, setIsLoading] = useState(true)
+    const [finalLocation,setFinalLocation]= useState("Abuja")
     const [weatherForeCast, setWeatherForeCast] = useState({
         cod: 0,
         city: {
@@ -78,22 +80,31 @@ export const WeatherctxProvider = (props) => {
         const getFullWeather = async () => {
             setIsLoading(true)
             try {
-            const url = 'https://api.openweathermap.org/data/2.5/forecast?q=ABUJA&appid=075ab84264b752986e16559ecbe06c8f';
+            const url = `https://api.openweathermap.org/data/2.5/forecast?q=${finalLocation}&appid=075ab84264b752986e16559ecbe06c8f`;
             const res = await fetch(url)
+            if(res.ok)
+            {
             const data = await res.json();
             setWeatherForeCast(data)
             setIsLoading(false)
             }
-            catch{
-                setIsLoading(true)
+            else 
+            {
+                throw new Error("Error 404");
+            }
+            }
+            catch(err){
+                console.log(err.message)
+                setIsLoading(false)
             }
             finally{
-                setIsLoading(false)
+         
             }
 }
             getFullWeather()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+ 
+    }, [finalLocation])
+    console.log(finalLocation)
 return (
     <WeatherCtx.Provider
         value={
@@ -107,7 +118,9 @@ return (
                 current: weatherForeCast?.list[0],
                 getWeatherId: getWeatherId,
                 isLoading: isLoading,
-                setIsLoading:setIsLoading
+                setIsLoading:setIsLoading,
+                finalLocation:finalLocation,
+                setFinalLocation:setFinalLocation
             
         }
         }
